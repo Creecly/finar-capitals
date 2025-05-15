@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinAr CAPITAL</title>
+    <style>
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Стили слайдов */
+        .slide {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        /* Шапка */
+        header {
+            background: #1a237e;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Кнопки */
+        .header-btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            animation: buttonPulse 2s infinite;
+        }
+
+        .header-btn:hover {
+            animation: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .license-btn { background: white; color: #1a237e; }
+        .reviews-btn { background: #4caf50; color: white; }
+        .pdf-btn { background: #ff5722; color: white; text-decoration: none; }
+
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Контакты */
+        .contacts {
+            margin-top: 15px;
+        }
+
+        .contacts a {
+            color: #e8eaf6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contacts a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body style="margin:0;font-family:Arial,sans-serif;background:#f5f5f5;">
+
+    <!-- Шапка с кнопками -->
+    <header>
+        <div class="header-content">
+            <div class="title-group">
+                <h1 style="margin:0;">FinAr</h1>
+                <h2 style="margin:0 0 0 10px;font-weight:normal;">CAPITAL</h2>
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button class="header-btn license-btn" onclick="showModal('license')">Licencia</button>
+                <button class="header-btn reviews-btn" onclick="showModal('reviews')">Reseñas</button>
+                <a href="docs/license.pdf" download class="header-btn pdf-btn">PDF</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div style="margin-top:100px;padding-bottom:30px;">
+        <!-- Слайд 1 -->
+        <div class="slide" id="slide1" style="transition-delay:0.1s;">
+            <img src="images/1.jpg" alt="FinAr" style="width:100%;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+        </div>
+
+        <!-- Слайд 2 -->
+        <div class="slide" id="slide2" style="transition-delay:0.3s;">
+            <img src="images/2.jpg" alt="FinAr" style="width:100%;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+        </div>
+
+        <!-- Слайд 3 (текст) -->
+        <div class="slide" id="slide3" style="transition-delay:0.5s;background:white;padding:25px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+            <p style="line-height:1.6;margin-bottom:15px;">Por supuesto, entiendo que quieres sentirte seguro y eso es totalmente justo.</p>
+            <p style="line-height:1.6;margin-bottom:15px;">Trabajamos legalmente y cooperamos con instituciones financieras registradas oficialmente.</p>
+            <p style="line-height:1.6;margin-bottom:15px;">Disponemos de toda la documentación necesaria para respaldar nuestro trabajo.</p>
+            <p style="font-weight:bold;color:#1a237e;line-height:1.6;">¿Cómo elimino crédito de mi cuenta?</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно лицензии -->
+    <div id="license-modal" class="modal" onclick="hideModal('license')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="hideModal('license')">×</button>
+            <img src="images/license.jpg" alt="Licencia" style="max-width:100%;">
+        </div>
+    </div>
+
+    <!-- Модальное окно отзывов -->
+    <div id="reviews-modal" class="modal" onclick="hideModal('reviews')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="hideModal('reviews')">×</button>
+            <h3 style="text-align:center;">Reseñas de clientes</h3>
+            <div id="reviews-container" style="display:grid;gap:20px;margin-top:20px;">
+                <!-- Отзывы будут загружены здесь -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer style="background:#1a237e;color:white;text-align:center;padding:20px;">
+        <p style="margin:0;">&copy; 2017 FinAr CAPITAL</p>
+        <div class="contacts">
+            <p style="margin:10px 0 5px;">Contacto:</p>
+            <p><a href="mailto:finarcapital@gmail.com">finarcapital@gmail.com</a></p>
+            <p><a href="https://t.me/Manager_SofiaFInAR" target="_blank">@Manager_SofiaFInAR</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация при скролле
+        function checkSlides() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                const rect = slide.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    slide.style.opacity = '1';
+                    slide.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Показать/скрыть модальные окна
+        function showModal(type) {
+            document.getElementById(`${type}-modal`).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            if (type === 'reviews') {
+                loadReviews();
+            }
+        }
+
+        function hideModal(type) {
+            document.getElementById(`${type}-modal`).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Загрузка отзывов
+        function loadReviews() {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 4; i++) {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.style.background = '#f5f5f5';
+                reviewDiv.style.borderRadius = '8px';
+                reviewDiv.style.padding = '15px';
+                reviewDiv.style.textAlign = 'center';
+
+                const img = document.createElement('img');
+                img.src = `images/review${i}.jpg`;
+                img.style.maxWidth = '100%';
+                img.style.borderRadius = '5px';
+                img.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+
+                reviewDiv.appendChild(img);
+                container.appendChild(reviewDiv);
+            }
+        }
+
+        // Инициализация
+        window.addEventListener('load', () => {
+            checkSlides();
+            window.addEventListener('scroll', checkSlides);
+        });
+    </script>
+</body>
+</html>
